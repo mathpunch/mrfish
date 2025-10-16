@@ -3,31 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatting</title>
+    <title>Fuck You msmemerguy</title>
     <style>
-        body, html {
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            background: #181a1b;
+            color: #eeeeee;
             width: 100%;
-            height: 100%;
-            overflow: hidden; /* Disable scrolling */
-            background-color: grey; /* Set background color to grey */
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
         }
-        .widget-container {
-            width: 100%;
-            height: 100%;
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            box-sizing: border-box;
+        }
+        .shutdown-container {
+            background: #23272a;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+            padding: 3rem 2.5rem;
+            max-width: 400px;
+            text-align: center;
+        }
+        .shutdown-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff5e5e;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 500px) {
+            .shutdown-container {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="widget-container">
-        <widgetbot
-            server="1392177953932050514"
-            channel="1392177956465545429"
-            width="100%"
-            height="100%">
-        </widgetbot>
+    <div class="shutdown-container">
+        <div class="shutdown-title">Sorry this website has been shut down for now</div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 </body>
 </html>
