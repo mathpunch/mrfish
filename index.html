@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arctic 1.0</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* Disable scrolling */
-            background-color: grey; /* Set background color to grey */
-        }
-        .widget-container {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-<body>
-    <div class="widget-container">
-        <widgetbot
-            server="1460470615780753474"
-            channel="1460470616711762079"
-            width="100%"
-            height="100%">
-        </widgetbot>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
-</body>
-</html>
+<script src="/uv/uv.bundle.js"></script>
+<script src="/uv/uv.config.js"></script>
+<script>
+    // Ensure Wisp is forced for all WebSocket traffic
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/uv-sw.js', {
+            scope: '/service/'
+        }).then(() => {
+            console.log('UV Service Worker Registered');
+        });
+    }
+
+    // Use a simpler iframe source that Ultraviolet can rewrite easily
+    const discordUrl = "https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079";
+    const proxiedUrl = __uv$config.prefix + __uv$config.encodeUrl(discordUrl);
+    
+    document.getElementById('chat-frame').src = proxiedUrl;
+</script>
+
+<iframe id="chat-frame" style="width:100%; height:100%; border:none;"></iframe>
