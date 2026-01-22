@@ -1,20 +1,56 @@
-<script src="/uv/uv.bundle.js"></script>
-<script src="/uv/uv.config.js"></script>
-<script>
-    // Ensure Wisp is forced for all WebSocket traffic
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/uv-sw.js', {
-            scope: '/service/'
-        }).then(() => {
-            console.log('UV Service Worker Registered');
-        });
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic 1.0</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #2f3136; font-family: sans-serif; }
+        #status { color: white; text-align: center; margin-top: 20%; font-size: 18px; }
+        iframe { width: 100%; height: 100%; border: none; display: none; }
+    </style>
+</head>
+<body>
 
-    // Use a simpler iframe source that Ultraviolet can rewrite easily
-    const discordUrl = "https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079";
-    const proxiedUrl = __uv$config.prefix + __uv$config.encodeUrl(discordUrl);
-    
-    document.getElementById('chat-frame').src = proxiedUrl;
-</script>
+    <div id="status">Initializing Arctic Proxy...</div>
+    <iframe id="chat-frame"></iframe>
 
-<iframe id="chat-frame" style="width:100%; height:100%; border:none;"></iframe>
+    <script src="/static/uv/uv.bundle.js"></script>
+    <script src="/static/uv/uv.config.js"></script>
+
+    <script>
+        async function launch() {
+            const status = document.getElementById('status');
+            const frame = document.getElementById('chat-frame');
+
+            if ('serviceWorker' in navigator) {
+                try {
+                    // 1. Register the Service Worker from your static path
+                    // NOTE: uv-sw.js usually needs to be in the root or specifically configured
+                    await navigator.serviceWorker.register('/uv-sw.js', {
+                        scope: __uv$config.prefix
+                    });
+
+                    // 2. Prepare the WidgetBot URL
+                    const targetUrl = "https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079";
+                    
+                    // 3. Encode the URL using Ultraviolet's logic
+                    const proxied = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
+
+                    // 4. Switch from loading text to the widget
+                    status.style.display = 'none';
+                    frame.src = proxied;
+                    frame.style.display = 'block';
+
+                } catch (err) {
+                    status.innerHTML = "Proxy Error: " + err.message + "<br><small>Check if uv-sw.js is in your main folder.</small>";
+                }
+            } else {
+                status.innerHTML = "This iPad does not support Service Workers.";
+            }
+        }
+
+        launch();
+    </script>
+</body>
+</html>
