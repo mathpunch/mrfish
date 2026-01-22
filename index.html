@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic 1.0</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #36393f; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Disable scrolling */
+            background-color: grey; /* Set background color to grey */
+        }
+        .widget-container {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
-    <iframe src="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079"></iframe>
+    <div class="widget-container">
+        <widgetbot
+            server="1460470615780753474"
+            channel="1460470616711762079"
+            width="100%"
+            height="100%">
+        </widgetbot>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 </body>
 </html>
