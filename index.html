@@ -10,24 +10,52 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Disable scrolling */
-            background-color: grey; /* Set background color to grey */
+            overflow: hidden; 
+            background-color: #2f3136; /* Discord-style dark grey */
+            display: flex;
+            flex-direction: column;
         }
+
         .widget-container {
+            flex-grow: 1;
             width: 100%;
             height: 100%;
+        }
+
+        /* Standard iframe styling */
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Fallback link for mobile if the proxy fails */
+        .fallback {
+            background: #202225;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
+
     <div class="widget-container">
-        <widgetbot
-            server="1460470615780753474"
-            channel="1460470616711762079"
-            width="100%"
-            height="100%">
-        </widgetbot>
+        <iframe 
+            src="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079" 
+            allow="clipboard-write; fullscreen"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+        </iframe>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+
+    <a href="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079" 
+       target="_blank" 
+       class="fallback">
+       Trouble loading? Click here to open chat.
+    </a>
+
 </body>
 </html>
