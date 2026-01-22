@@ -10,52 +10,52 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; 
-            background-color: #2f3136; /* Discord-style dark grey */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .widget-container {
-            flex-grow: 1;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Standard iframe styling */
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Fallback link for mobile if the proxy fails */
-        .fallback {
-            background: #202225;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px;
+            background-color: #2f3136; /* Discord Grey */
+            color: white;
             font-family: sans-serif;
-            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .info-box {
+            padding: 20px;
+        }
+        /* Style the link so it looks like a button */
+        .direct-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #5865F2;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="widget-container">
-        <iframe 
-            src="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079" 
-            allow="clipboard-write; fullscreen"
-            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-        </iframe>
+    <div class="info-box">
+        <h1>Arctic 1.0</h1>
+        <p>If the chat bubble doesn't appear in the corner,<br>the proxy is blocking the connection.</p>
+        
+        <a href="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079" 
+           target="_blank" 
+           class="direct-link">
+           Open Chat Directly
+        </a>
     </div>
 
-    <a href="https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079" 
-       target="_blank" 
-       class="fallback">
-       Trouble loading? Click here to open chat.
-    </a>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+        window.addEventListener('load', () => {
+            new Crate({
+                server: '1460470615780753474',
+                channel: '1460470616711762079',
+                shard: 'https://e.widgetbot.io'
+            })
+        })
+    </script>
 
 </body>
 </html>
