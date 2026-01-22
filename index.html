@@ -5,52 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arctic 1.0</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #2f3136; font-family: sans-serif; }
-        #status { color: white; text-align: center; margin-top: 20%; font-size: 18px; }
-        iframe { width: 100%; height: 100%; border: none; display: none; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Disable scrolling */
+            background-color: grey; /* Set background color to grey */
+        }
+        .widget-container {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
-
-    <div id="status">Initializing Arctic Proxy...</div>
-    <iframe id="chat-frame"></iframe>
-
-    <script src="/static/uv/uv.bundle.js"></script>
-    <script src="/static/uv/uv.config.js"></script>
-
-    <script>
-        async function launch() {
-            const status = document.getElementById('status');
-            const frame = document.getElementById('chat-frame');
-
-            if ('serviceWorker' in navigator) {
-                try {
-                    // 1. Register the Service Worker from your static path
-                    // NOTE: uv-sw.js usually needs to be in the root or specifically configured
-                    await navigator.serviceWorker.register('/uv-sw.js', {
-                        scope: __uv$config.prefix
-                    });
-
-                    // 2. Prepare the WidgetBot URL
-                    const targetUrl = "https://e.widgetbot.io/channels/1460470615780753474/1460470616711762079";
-                    
-                    // 3. Encode the URL using Ultraviolet's logic
-                    const proxied = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
-
-                    // 4. Switch from loading text to the widget
-                    status.style.display = 'none';
-                    frame.src = proxied;
-                    frame.style.display = 'block';
-
-                } catch (err) {
-                    status.innerHTML = "Proxy Error: " + err.message + "<br><small>Check if uv-sw.js is in your main folder.</small>";
-                }
-            } else {
-                status.innerHTML = "This iPad does not support Service Workers.";
-            }
-        }
-
-        launch();
-    </script>
+    <div class="widget-container">
+        <widgetbot
+            server="1460470615780753474"
+            channel="1460470616711762079"
+            width="100%"
+            height="100%">
+        </widgetbot>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 </body>
 </html>
